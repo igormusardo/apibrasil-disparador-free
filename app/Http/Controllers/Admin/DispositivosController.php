@@ -22,13 +22,12 @@ class DispositivosController extends Controller
         $servidores = Servidores::getAll();
         $apis = API::getAll();
 
-
         $apis = array_filter($apis, function($api) {
-            return $api->type == 'whatsapp' or $api->type == 'baileys';
+            return isset($api->type) && ($api->type == 'whatsapp' || $api->type == 'baileys');
         });
-
+        
         $servidores = array_filter($servidores, function($servidor) {
-            return $servidor->type == 'whatsapp' or $servidor->type == 'baileys';
+            return isset($servidor->type) && ($servidor->type == 'whatsapp' || $servidor->type == 'baileys');
         });
 
         return view('admin.dispositivos')
